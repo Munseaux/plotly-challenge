@@ -41,11 +41,12 @@ d3.json(url).then(data => {
     console.log(data);
     var topTen = currentId["sample_values"].slice(0,10);
     var topNames = currentId["otu_ids"].slice(0,10).values();
-    // var arr = [];
-    // topNames.forEach( name => {
-    //     arr.push(name);
-    // });
-    // console.log(arr);
+    var toppies = currentId["otu_ids"].slice(0,10);
+    var arr = [];
+    toppies.forEach( name => {
+        arr.push(name);
+    });
+    console.log(arr);
     console.log(topNames);
     //I dont remember what the point of this graph is, but we at least have the data. 
     var trace1 = {
@@ -56,20 +57,41 @@ d3.json(url).then(data => {
     };
 
     var layout = {
-        title: "Some title",
+        title: "",
         xaxis: {
-            title: "x axis"
+            // title: "x axis"
         },
         yaxis: {
-            title: "y axis",
+            // title: "Samples",
             tickmode: "array",
             tickvals: [0,1,2,3,4,5,6,7,8,9],
-            ticktext: ["poop", "poop", "poop","poop", "poop","poop", "poop","poop", "poop","poop"]
+            ticktext: ["OTU " + arr[0],"OTU " + arr[1] , "OTU " + arr[2],"OTU " + arr[3], "OTU " + arr[4],"OTU " + arr[5], "OTU " + arr[6],"OTU " + arr[7], "OTU " + arr[8],"OTU " + arr[9]]
         }
     };
 
     var datums = [trace1];
 
     Plotly.newPlot("bar", datums, layout);
+
+    var trace2 = {
+        x:  currentId["otu_ids"],
+        y: currentId["sample_values"],
+        mode: "markers",
+        markers: {
+            size: +currentId["sample_values"],
+            sizemode: "area",
+            color: currentId["otu_ids"],
+            colorscale: "Greens"
+        }
+       
+    };
+
+    var dataz = [trace2];
+
+    var layout = {
+        showlegend: false,
+      };
+
+      Plotly.newPlot('bubble', dataz, layout);
 });
 
