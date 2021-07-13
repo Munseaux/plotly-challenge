@@ -76,14 +76,12 @@ d3.json(url).then(data => {
     var trace2 = {
         x:  currentId["otu_ids"],
         y: currentId["sample_values"],
+        text: currentId["otu_labels"],
         mode: "markers",
-        markers: {
-            size: +currentId["sample_values"],
-            sizemode: "area",
+        marker: {
             color: currentId["otu_ids"],
-            colorscale: "Greens"
+            size: currentId["sample_values"]
         }
-       
     };
 
     var dataz = [trace2];
