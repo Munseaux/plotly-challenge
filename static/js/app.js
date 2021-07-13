@@ -1,7 +1,3 @@
-init();
-
-d3.selectAll("body").on("change", init);
-
 function init() {
     const url = "data/samples.json";
 
@@ -96,3 +92,7 @@ function init() {
         Plotly.newPlot('bubble', dataz, layout);
     });
 }
+
+init();
+
+d3.selectAll("body").on("change", init);
